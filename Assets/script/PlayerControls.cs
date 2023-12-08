@@ -6,22 +6,16 @@ public class PlayerControls : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    public float speed; //for movement
-
     public float jumpingPower; //for jump
 
     private bool isGrounded;    //for jump
-
-    public bool isFacingRight; //for flip
-
-    public float horizontal;
 
     public Transform groundCheck;   //for jump
 
     public LayerMask groundLayer;   //for jump
 
     public Animator animator;
-    public bool isWalking;
+
     public bool isJumping;
 
 
@@ -35,7 +29,6 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         PlayerMovement();
-        Flip();
         HandleAnimation();
 
     }
@@ -43,7 +36,6 @@ public class PlayerControls : MonoBehaviour
 
     void PlayerMovement()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButtonDown("Jump") && IsGrounded()) //if button hit and is player grounded
         {
@@ -54,40 +46,20 @@ public class PlayerControls : MonoBehaviour
         {
             isJumping = false;
         }
-        isWalking = horizontal != 0 ? true : false;
+ 
     }
 
 
-    private void FixedUpdate() //execution order
-    {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y); //how long button pressed or hold(left/right)
-
-
-    }
 
     void HandleAnimation()
     {
 
-        animator.SetBool("isWalking", isWalking);
         animator.SetBool("isJumping", isJumping);
 
     }
 
 
-    void Flip()
-    {           //Flip to Left                      //Flip to Right
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector2 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
-    private void LateUpdate() //late reading 
-    {
 
-    }
 
     private bool IsGrounded()
     {
