@@ -5,13 +5,23 @@ using UnityEngine;
 public class ObstacleScript : MonoBehaviour
 {
     public float speed;
-    // Slled before the first frame update
+
+    private void Start()
+    {
+        speed = 5;
+    }
+
+
+    // Called before the first frame update
     private void Update()
     {
         transform.position += Vector3.left * speed * Time.deltaTime;
+
+
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    void addSpeed()
     {
-        Debug.Log("GAME OVER");
+        speed = speed + 5;
     }
 }

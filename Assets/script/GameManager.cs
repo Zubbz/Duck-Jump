@@ -1,29 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public int score;
-    public bool isGameOver = false;
-    void Start()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    [Header("Initial Value")]
+    public int totalScore;
+    public int lastScore;
+    public int highScore;
 
-    public void GameOver()
-    {
-        isGameOver = true;
-        Time.timeScale = 0;
-        Debug.Log("GAME OVER!");
-    }
+    [Header("InGame panel")]
+    public TextMeshProUGUI txtScore;
 
+    [Header("GameOver panel")]
+    public TextMeshProUGUI txtLastScore;
+    public TextMeshProUGUI txtHIghScore;
+
+
+    void Update()
+    {
+        highScore = PlayerPrefs.GetInt("p_highScore");
+
+        txtScore.text = totalScore.ToString();
+        txtHIghScore.text = highScore.ToString();
+        lastScore = PlayerPrefs.GetInt("p_lastScore");
+        txtLastScore.text = lastScore.ToString();
+    }
 }

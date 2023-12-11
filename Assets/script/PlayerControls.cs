@@ -22,6 +22,7 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -37,7 +38,7 @@ public class PlayerControls : MonoBehaviour
     void PlayerMovement()
     {
 
-        if (Input.GetButtonDown("Jump") && IsGrounded()) //if button hit and is player grounded
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !isJumping) //if button hit and is player grounded
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower); //jump
             isJumping = true;
