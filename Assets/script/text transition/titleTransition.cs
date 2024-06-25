@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class titleTransition : MonoBehaviour
 {
-    public Transform TitleTransit, StartTransit, OptionTransit, QuitTransit;
+    public Transform TitleTransit, StartTransit, QuitTransit;
 
     void Start()
     {
-
+        //  Handles the transition of all texts when the game starts or goes to the Main Menu
         Debug.Log("Animation Played");
 
         TitleTransit.localPosition = new Vector2(904, 168);
